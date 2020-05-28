@@ -4,6 +4,8 @@ import tkinter as tk
 
 
 def getPasswords():
+    data.delete(1.0, tk.END)
+
     results = ''
     # Getting saved wifi profiles using cmd command netsh wlan show profiles
     wifiNames = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles'])
@@ -19,23 +21,19 @@ def getPasswords():
         password = [line.split(':')[1][1:-1]
                     for line in password if 'Key Content' in line]
         try:
-            print('{:<30}| {:<}'.format(name, password[0]))
             tempRes += '{:<30}| {:<}\n'.format(name, password[0])
         except IndexError:
-            print('{:<30}| {:<}'.format(
-                name, 'No PASSWORD - other authentication protocol might been used'))
             tempRes += '{:<30}| {:<}\n'.format(
                 name, 'No PASSWORD - other authentication protocol might been used')
 
-        results += tempRes
-
-    data.delete(1.0, tk.END)
-    data.insert(tk.END, results)
+        data.insert(tk.END, tempRes)
 
 
 # ------------- GUI -------------------
 win = tk.Tk()
 win.title('Wifi Passwords')
+win.geometry("800x700+50+50")
+win.config(background='#00ff00')
 
 label = tk.Label(win, text='Click start to get your saved wifi passes')
 label.grid(row=0, column=0, pady=5)
@@ -44,7 +42,7 @@ button = tk.Button(
     win, text='Show saved Passwords for Wifis', command=getPasswords)
 button.grid(row=0, column=1, pady=5)
 
-data = tk.Text(win, height=40, width=100)
+data = tk.Text(win, height=40, width=100, bg='#00ff00')
 data.grid(row=1, column=0, columnspan=2)
 
 labelFooter = tk.Label(
