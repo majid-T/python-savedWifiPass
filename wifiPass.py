@@ -3,16 +3,11 @@ import subprocess
 import tkinter as tk
 
 
-def pingSomeIp(destIp):
+def pingSomeIp():
     data.delete(1.0, tk.END)
-    # timeResult = []
+    destIp = pingDestInput.get()
     pingResult = subprocess.check_output(['ping', destIp]).decode('utf-8')
     data.insert(tk.END, pingResult)
-
-    # pingResultArr = pingResult.split('\n')[2:6]
-    # for i in pingResultArr:
-    #     timeResult.append(i.split(' ')[4][5:-2])
-    # return timeResult
 
 
 def getPasswords():
@@ -45,20 +40,27 @@ def getPasswords():
 win = tk.Tk()
 win.title('Wifi Passwords')
 win.geometry("800x700+50+50")
-win.config(background='#00ff00')
+win.config(background='#339933')
 
-label = tk.Label(win, text='Click start to get your saved wifi passes')
-label.grid(row=0, column=0, pady=5)
+# label = tk.Label(win, text='Click start to get your saved wifi passes')
+# label.grid(row=0, column=0, pady=5)
 
 button = tk.Button(
     win, text='Show saved Passwords for Wifis', command=getPasswords)
-button.grid(row=0, column=1, pady=5)
+button.grid(row=0, column=0, pady=5)
 
-data = tk.Text(win, height=40, width=100, bg='#00ff00')
-data.grid(row=1, column=0, columnspan=2)
+pingDestInput = tk.Entry(win, width=40)
+pingDestInput.grid(row=0, column=1, pady=5)
+
+button = tk.Button(win, text='Ping', command=pingSomeIp)
+button.grid(row=0, column=2, pady=5)
+
+
+data = tk.Text(win, height=40, width=100, bg='#00cc66')
+data.grid(row=1, column=0, columnspan=4)
 
 labelFooter = tk.Label(
     win, text='Sample non official Copy- Under dev version majid.shockoohi@gmail.com')
-labelFooter.grid(row=2, column=0, columnspan=2, padx=10, pady=1)
+labelFooter.grid(row=3, column=0, columnspan=2, padx=10, pady=1)
 
 win.mainloop()
