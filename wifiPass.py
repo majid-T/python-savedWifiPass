@@ -3,6 +3,18 @@ import subprocess
 import tkinter as tk
 
 
+def pingSomeIp(destIp):
+    data.delete(1.0, tk.END)
+    # timeResult = []
+    pingResult = subprocess.check_output(['ping', destIp]).decode('utf-8')
+    data.insert(tk.END, pingResult)
+
+    # pingResultArr = pingResult.split('\n')[2:6]
+    # for i in pingResultArr:
+    #     timeResult.append(i.split(' ')[4][5:-2])
+    # return timeResult
+
+
 def getPasswords():
     data.delete(1.0, tk.END)
 
