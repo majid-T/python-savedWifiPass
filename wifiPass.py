@@ -3,6 +3,12 @@ import subprocess
 import tkinter as tk
 
 
+def getExternalIp():
+    cmdRes = subprocess.check_output(
+        ['nslookup', 'myip.opendns.com', 'resolver1.opendns.com']).decode('utf-8')
+    print(cmdRes)
+
+
 def pingSomeIp():
     data.delete(1.0, tk.END)
     destIp = pingDestInput.get()
