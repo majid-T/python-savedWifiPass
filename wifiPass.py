@@ -51,18 +51,18 @@ win.title('Wifi Passwords')
 win.geometry("800x700+50+50")
 win.config(background='#339933')
 
-button = tk.Button(
-    win, text='Show saved Passwords for Wifis', command=getPasswords)
-button.grid(row=0, column=0, pady=5)
+wifisBtn = tk.Button(
+    win, text='Saved Wifis', command=getPasswords)
+wifisBtn.grid(row=0, column=0, pady=5)
 
 pingDestInput = tk.Entry(win, width=40)
 pingDestInput.grid(row=0, column=1, pady=5)
 
-button = tk.Button(win, text='Ping', command=pingSomeIp)
-button.grid(row=0, column=2, pady=5)
+pingBtn = tk.Button(win, text='Ping', command=pingSomeIp)
+pingBtn.grid(row=0, column=2, pady=5)
 
-button = tk.Button(win, text='Ext IP', command=getExternalIp)
-button.grid(row=0, column=3, pady=5)
+ipBtn = tk.Button(win, text='Ext IP', command=getExternalIp)
+ipBtn.grid(row=0, column=3, pady=5)
 
 
 data = tk.Text(win, height=40, width=100, bg='#00cc66')
