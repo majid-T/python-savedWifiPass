@@ -4,9 +4,12 @@ import tkinter as tk
 
 
 def getExternalIp():
+    data.delete(1.0, tk.END)
+
     cmdRes = subprocess.check_output(
         ['nslookup', 'myip.opendns.com', 'resolver1.opendns.com']).decode('utf-8')
-    print(cmdRes)
+
+    data.insert(tk.END, cmdRes)
 
 
 def pingSomeIp():
@@ -58,9 +61,12 @@ pingDestInput.grid(row=0, column=1, pady=5)
 button = tk.Button(win, text='Ping', command=pingSomeIp)
 button.grid(row=0, column=2, pady=5)
 
+button = tk.Button(win, text='Ext IP', command=getExternalIp)
+button.grid(row=0, column=3, pady=5)
+
 
 data = tk.Text(win, height=40, width=100, bg='#00cc66')
-data.grid(row=1, column=0, columnspan=4)
+data.grid(row=1, column=0, columnspan=5)
 
 labelFooter = tk.Label(
     win, text='Sample non official Copy- Under dev version majid.shockoohi@gmail.com')
